@@ -33,7 +33,7 @@ export const MsTeamsApiRouter = (components: any): Router => {
         } else if (component['isConnector']) {
             console.log(`Creating a new connector instance at ${component.connectEndpoint}`);
 
-            let connector: IConnector = new component(); // TODO: byt namn på IConnector? - kolliderar med teamsbuilder
+            let connector: IConnector = new component(); 
 
             // Connector Ping endpoint
             router.get(component.pingEndpoint, (req, res) => {

@@ -1,12 +1,11 @@
 {
   "name": "express-msteams-host",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Express utility for Microsoft Teams solutions",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc -p .",
-    "watch": "tsc -w -p .",
     "clean": "rm -rf lib"
   },
   "keywords": [
@@ -16,11 +15,13 @@
     "typescript"
   ],
   "author": "Wictor Wilén (wictor@wictorwilen.se)",
-  "maintainers": [{
-    "name": "Wictor Wilén",
-    "email": "wictor@wictorwilen.se",
-    "url": "http://www.wictorwilen.se"
-  }],
+  "maintainers": [
+    {
+      "name": "Wictor Wilén",
+      "email": "wictor@wictorwilen.se",
+      "url": "http://www.wictorwilen.se"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/wictorwilen/express-msteams-host.git"
@@ -36,7 +37,7 @@
     "typescript": "^2.9.2"
   },
   "dependencies": {
-    "botbuilder": "^3.11.0",
+    "botbuilder": "^3.15.0",
     "botbuilder-teams": "^0.2.1",
     "express": "^4.16.3"
   }
