@@ -21,6 +21,14 @@
     "email": "wictor@wictorwilen.se",
     "url": "http://www.wictorwilen.se"
   }],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wictorwilen/express-msteams-host.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wictorwilen/express-msteams-host/issues"
+  },
+  "homepage": "https://github.com/wictorwilen/express-msteams-host",
   "license": "MIT",
   "devDependencies": {
     "@types/express": "^4.16.0",
