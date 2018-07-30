@@ -1,4 +1,4 @@
-// Copyright (c) Wictor Wilén. All rights reserved. 
+// Copyright (c) Wictor Wilén. All rights reserved.
 // Licensed under the MIT license.
 
 /**
@@ -19,5 +19,5 @@ export function ConnectorDeclaration(
         target.pingEndpoint = pingEndpoint;
         target.connectPage = connectPage;
         target.connectedPage = connectedPage;
-    }
+    };
 }

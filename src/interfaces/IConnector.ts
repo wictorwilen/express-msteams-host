@@ -1,4 +1,4 @@
-// Copyright (c) Wictor Wilén. All rights reserved. 
+// Copyright (c) Wictor Wilén. All rights reserved.
 // Licensed under the MIT license.
 
 /**
@@ -14,5 +14,5 @@ export interface IConnector {
     /**
      * Default method for invoking the Connector
      */
-    Ping(): Promise<void>[];
+    Ping(): Array<Promise<void>>;
 }

@@ -1,7 +1,7 @@
-// Copyright (c) Wictor Wilén. All rights reserved. 
+// Copyright (c) Wictor Wilén. All rights reserved.
 // Licensed under the MIT license.
 
-import { IChatConnectorSettings } from 'botbuilder';
+import { IChatConnectorSettings } from "botbuilder";
 
 /**
  * Decorator function for Bots
@@ -19,8 +19,8 @@ export function BotDeclaration(
         target.isBot = true;
         target.botSettings = <IChatConnectorSettings>{
             appId: appId,
-            appPassword: appPassword
+            appPassword: appPassword,
         };
         target.serviceEndpoint = endpoint;
-    }
+    };
 }

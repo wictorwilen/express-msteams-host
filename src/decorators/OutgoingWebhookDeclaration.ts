@@ -1,4 +1,4 @@
-// Copyright (c) Wictor Wilén. All rights reserved. 
+// Copyright (c) Wictor Wilén. All rights reserved.W
 // Licensed under the MIT license.
 
 /**
@@ -9,5 +9,5 @@ export function OutgoingWebhookDeclaration(endpoint: string) {
     return (target: any) => {
         target.isOutgoingWebhook = true;
         target.serviceEndpoint = endpoint;
-    }
+    };
 }
