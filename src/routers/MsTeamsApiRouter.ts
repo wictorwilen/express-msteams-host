@@ -23,7 +23,9 @@ export const MsTeamsApiRouter = (components: any): Router => {
                 console.log(`Creating a new bot instance at ${component.serviceEndpoint}`);
 
                 const bot: IBot = new component(new teamBuilder.TeamsChatConnector(component.botSettings));
-                router.post(component.serviceEndpoint, bot.Connector.listen());
+                router.post(component.serviceEndpoint, (req: any, res: any) => {
+                    return bot.Connector.listen()(req, res);
+                });
 
             } else if (component["isOutgoingWebhook"]) {
                 console.log(`Creating a new outgoing webhook instance at ${component.serviceEndpoint}`);

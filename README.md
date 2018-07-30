@@ -28,7 +28,6 @@ import { BotDeclaration, IBot } from 'express-msteams-host';
 import * as teamBuilder from 'botbuilder-teams';
 
 @BotDeclaration(
-    '00000000-0000-0000-0000-000000000000',
     '/api/messages',
     process.env.MICROSOFT_APP_ID,
     process.env.MICROSOFT_APP_PASSWORD)
