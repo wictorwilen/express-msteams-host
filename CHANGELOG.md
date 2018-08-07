@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [*0.0.6*] - <*2018-08-07*>
+
+### Changed
+
+* Replace all arguments in the IConnector with the Express Request object
+
+### Fixed
+
+* Added current host in the content security policy for tabs, so we can load ADAL renewal frames
+
+### Changed
+
+* Ping method changed so that it accepts data
+* Ping method now supports both POST and GET, data for POST is the body and data for GET is the query string
+
 ## [*0.0.5*] - <*2018-07-31*>
 
 ### Changed

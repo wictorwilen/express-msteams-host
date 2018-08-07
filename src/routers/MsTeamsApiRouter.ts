@@ -39,9 +39,19 @@ export const MsTeamsApiRouter = (components: any): Router => {
                 const connector: IConnector = new component();
 
                 // Connector Ping endpoint
+                // POST option
+                router.post(component.pingEndpoint, (req, res) => {
+                    Promise.all(connector.Ping(req)).then((p) => {
+                        console.log(`Connector ping succeeded (POST)`);
+                        res.redirect("/");
+                    }).catch((reason) => {
+                        console.log(reason);
+                    });
+                });
+                // GET option
                 router.get(component.pingEndpoint, (req, res) => {
-                    Promise.all(connector.Ping()).then((p) => {
-                        console.log(`Connector ping succeeded`);
+                    Promise.all(connector.Ping(req)).then((p) => {
+                        console.log(`Connector ping succeeded (GET)`);
                         res.redirect("/");
                     }).catch((reason) => {
                         console.log(reason);
@@ -65,7 +75,7 @@ export const MsTeamsApiRouter = (components: any): Router => {
 
                 // Connector connect post back
                 router.post(component.connectEndpoint, (req, res) => {
-                    connector.Connect(req.body);
+                    connector.Connect(req);
                     res.redirect(component.connectedPage);
                 });
 
