@@ -43,7 +43,7 @@ Connectors MUST be implemented as a class implementing the `IConnector` interfac
 
 ``` TypeScript
 import { ConnectorDeclaration, IConnector } from 'express-msteams-host';
-
+import { Request } from "express";
 
 @ConnectorDeclaration(
     '/api/connector/connect',
@@ -52,11 +52,11 @@ import { ConnectorDeclaration, IConnector } from 'express-msteams-host';
     '/myConnectorConnected.html'
 )
 export class myConnector implements IConnector {
-    Connect(body: any): void {
+    Connect(req: Request): void {
         ...
     }
 
-    Ping(): Promise<void>[] {
+    Ping(req: Request): Promise<void>[] {
         ...
     }
 }

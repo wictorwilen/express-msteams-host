@@ -49,7 +49,7 @@ export const MsTeamsPageRouter = (options: IMsTeamsPageRouterOptions): Router =>
 
     // Fallback
     router.use((req: any, res: any, next: any) => {
-        res.removeHeader("Content-Security-Policy")
+        res.removeHeader("Content-Security-Policy");
         res.removeHeader("X-Frame-Options"); // IE11
         return next();
     });

@@ -3,7 +3,6 @@
 
 import { Request } from "express";
 
-
 /**
  * Interface defining an Office 365 Connector
  */
