@@ -78,6 +78,14 @@ export class myOutgoingWebhook implements IOutgoingWebhook {
 }
 ```
 
+## Logging
+
+To enable logging from this module you need to add `msteams` to the `DEBUG` environment variable. See the [debug package](https://www.npmjs.com/package/debug) for more information.
+
+Example for Windows command line:
+
+> SET DEBUG=msteams
+
 ## License
 
 Copyright (c) Wictor Wilén. All rights reserved.

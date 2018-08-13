@@ -5,7 +5,7 @@
  * Decorator function for Office 365 Connectors
  * @param connectEndpoint The endpoint (HTTP GET) for the Connector connect end point (typically '/api/connector/connect')
  * @param pingEndpoint The endpoint (HTTP GET) for the Ping method (typically '/api/connector/ping')
- * @param connectPage The absolute url of the web page to be used when configuring/connecting the Connector
+ * @param connectPage The absolute url of the web page to be used when configuring/connecting the Connector. Uses EJS for rendering.
  * @param connectedPage The absolute url of the web page that the user will be redirected after a successful Connector configuration
  */
 export function ConnectorDeclaration(
