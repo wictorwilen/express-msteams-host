@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [*Unreleased*] - <*2018-09-07*>
+
+### Added
+
+* New declarator for Messaging Extensions
+* New interface for Message Extensions
+* New implementation of base Bot class
+
 ## [*1.0.1*] - <*2018-09-04*>
 
 ### Changed

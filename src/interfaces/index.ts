@@ -4,3 +4,4 @@
 export { IBot } from "./IBot";
 export { IConnector } from "./IConnector";
 export { IOutgoingWebhook } from "./IOutgoingWebhook";
+export { IMessageExtension } from "./IMessageExtension";
