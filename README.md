@@ -43,7 +43,7 @@ export class myBot extends TeamsBot {
 }
 ```
 
-A bot could also be implemented by implementing the `IBot` interface and the `BotDeclaration` decorator, which is how it was done in version 1.0.? and earlier. But such an implementation would require manual implementation of message extensions.
+> **NOTE** A bot could also be implemented by implementing the `IBot` interface and the `BotDeclaration` decorator, which is how it was done in version 1.0.? and earlier. But such an implementation would require manual implementation of message extensions.
 
 ### Decorators for Message Extensions
 

@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * New interface for Message Extensions
 * New implementation of base Bot class
 
+### Changes
+* Updated dependencies
+* Removed *strict* TypeScript checking due to incompatibilities with botbuilder-teams/adaptivecards
+
 ## [*1.0.1*] - <*2018-09-04*>
 
 ### Changed

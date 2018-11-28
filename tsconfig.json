@@ -2,12 +2,15 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "lib": ["es2015"],
+    "lib": [
+      "es2015",
+      "dom"
+    ],
     "declaration": true,
     "sourceMap": true,
     "outDir": "./lib",
     "rootDir": "./src",
-    "strict": true,
+    //"strict": true, // removed due to incompatibility with botbuilder-teams/adaptivecards
     "noImplicitAny": false,
     "noUnusedLocals": true
   }
