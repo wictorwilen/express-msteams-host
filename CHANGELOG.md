@@ -11,17 +11,28 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 * New declarator for Messaging Extensions
 * New interface for Message Extensions
-* New implementation of base Bot class
+* Added Bot Framework 4 middleware for Messaging Extensions
 
 ### Changes
 * Updated dependencies
+* Connector declaration redefined
 * Removed *strict* TypeScript checking due to incompatibilities with botbuilder-teams/adaptivecards
+* Updated to Bot Framework v4
+* Added `Storage` property to `BotDeclaration`
+* `IBot` interface changed to support new Bot Framework v4
+* `IConnector` `Ping` method updated
+
+
+### Removed
+* Removed experiemental/preview bot implementation
+
 
 ## [*1.0.1*] - <*2018-09-04*>
 
 ### Changed
 
 * Added *outlook.office.com* to the CSP policy of the page router, to support inline Connector configurations
+* Connector no longer uses a redirect pages when connecting/pinging but instead returns a HTTP 200 OK
 
 ## [*1.0.0*] - <*2018-08-13*>
 

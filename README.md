@@ -23,27 +23,29 @@ For the automatic routing to work the following usage MUST be followed.
 
 ### Implementation and decorator usage for Bots
 
-Bots SHOULD be implemented as a class extending the `TeamsBot` class and decorated using the `BotDeclaration` decorator.
+Bots MUST be implemented as a class using the `IBot` interface and decorated using the `BotDeclaration` decorator.
 
 ``` TypeScript
-import { BotDeclaration, TeamsBot } from 'express-msteams-host';
-import * as teamBuilder from 'botbuilder-teams';
+import { BotDeclaration, IBot } from 'express-msteams-host';
+import { MemoryStorage, ConversationState, TurnContext } from 'botbuilder';
 
 @BotDeclaration(
     '/api/messages',
+    new MemoryStorage(),
     process.env.MICROSOFT_APP_ID,
     process.env.MICROSOFT_APP_PASSWORD)
-export class myBot extends TeamsBot {
+export class myBot implements IBot {
 
-    public constructor(connector: teamBuilder.TeamsChatConnector) {
-        super(connector);
+    public constructor(conversationState: ConversationState) {
+        ...
+    }
+
+    public async onTurn(context: TurnContext): Promise<any> {
         ...
     }
 
 }
 ```
-
-> **NOTE** A bot could also be implemented by implementing the `IBot` interface and the `BotDeclaration` decorator, which is how it was done in version 1.0.? and earlier. But such an implementation would require manual implementation of message extensions.
 
 ### Decorators for Message Extensions
 
@@ -51,51 +53,49 @@ Message Extensions MUST be a class implementing the `IMessageExtension` interfac
 
 ``` TypeScript
 import { IMessageExtension } from 'express-msteams-host';
+import { TurnContext } from 'botbuilder';
+import { MessagingExtensionQuery, InvokeResponseTyped, MessagingExtensionResponse } from 'botbuilder-teams';
 
 
 export default class MyMessageExtension implements IMessageExtension {
-    constructor(private bot: builder.UniversalBot) {
-    }
-
-    public onQuery(event: builder.IEvent, query: teamBuilder.ComposeExtensionQuery, callback: (err: Error, result: teamBuilder.IComposeExtensionResponse, statusCode: number) => void): void {
+    public async onQuery(context: TurnContext, query: MessagingExtensionQuery): Promise<InvokeResponseTyped<MessagingExtensionResponse>> {
        ...
     }
 
     // this is used when canUpdateConfiguration is set to true 
-    public onQuerySettingsUrl(event: builder.IEvent, query: teamBuilder.ComposeExtensionQuery, callback: (err: Error, result: teamBuilder.IComposeExtensionResponse, statusCode: number) => void): void {
+    public async onQuerySettingsUrl(context: TurnContext): Promise<InvokeResponseTyped<{ composeExtension: { type: string, suggestedActions: { actions: Array<{ type: string, title: string, value: string }> } } }>> {
         ...
     }
 
-    public onSettingsUpdate(event: builder.IEvent, query: teamBuilder.ComposeExtensionQuery, callback: (err: Error, result: teamBuilder.IComposeExtensionResponse, statusCode: number) => void): void {
+    public onSettingsUpdate(context: TurnContext): Promise<InvokeResponse> {
        ...
     }
 
 }
 ```
 
-In the implementation of the bot, define the message extensions as below. You are responsible for instantiating the object, you might want to add additional parameters or configuration, and then you must invoke the `registerMessageExtensions()` method.
+In the implementation of the bot, define the message extensions as below. You are responsible for instantiating the object, you might want to add additional parameters or configuration.
 
 ``` TypeScript
-import { BotDeclaration, TeamsBot, MessageExtensionDeclaration } from 'express-msteams-host';
-import * as teamBuilder from 'botbuilder-teams';
+import { BotDeclaration, IBot } from 'express-msteams-host';
+import { MemoryStorage, ConversationState, TurnContext } from 'botbuilder';
 import { MyMessageExtension } from './MyMessageExtension';
 
 @BotDeclaration(
     '/api/messages',
+    new MemoryStorage()
     process.env.MICROSOFT_APP_ID,
     process.env.MICROSOFT_APP_PASSWORD)
-export class myBot extends TeamsBot {
+export class myBot implements IBot {
 
     @MessageExtensionDeclaration('myMessageExtension')
     private _myMessageExtension: MyMessageExtension;
 
-    public constructor(connector: teamBuilder.TeamsChatConnector) {
-        super(connector);
+   public constructor(conversationState: ConversationState) {
+
+        this._myMessageExtension = new MyMessageExtension();
+
         ...
-
-        this._myMessageExtension = new MyMessageExtension(this.universalBot);
-
-        super.registerMessageExtensions();
     }
 
 }

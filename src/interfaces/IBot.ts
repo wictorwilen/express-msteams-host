@@ -1,11 +1,15 @@
 // Copyright (c) Wictor Wilén. All rights reserved.
 // Licensed under the MIT license.
 
-import * as teamBuilder from "botbuilder-teams";
+import { TurnContext } from "botbuilder";
 
+/**
+ * Interface for defining a Bot
+ */
 export interface IBot {
     /**
-     * Exposes the Bot Framework Connector
+     * Turn Handler
+     * @param context the TurnContext
      */
-    readonly Connector: teamBuilder.TeamsChatConnector;
+    onTurn(context: TurnContext): Promise<any>;
 }

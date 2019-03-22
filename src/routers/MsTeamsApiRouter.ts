@@ -5,8 +5,11 @@ import { Router } from "express";
 import { IBot } from "../interfaces/IBot";
 import { IOutgoingWebhook } from "../interfaces/IOutgoingWebhook";
 import { IConnector } from "../interfaces/IConnector";
-import * as teamBuilder from "botbuilder-teams";
+// import * as teamBuilder from "botbuilder-teams";
 import * as debug from "debug";
+import { BotFrameworkAdapter, ConversationState } from "botbuilder";
+import { TeamsMiddleware } from "botbuilder-teams";
+import { MessagingExtensionMiddleware } from "../impl/MessagingExtensionMiddleware";
 
 /**
  * Express router for Microsoft Teams Connectors, Bots and Outgoing Webhooks
@@ -23,9 +26,37 @@ export const MsTeamsApiRouter = (components: any): Router => {
             if (component["isBot"]) {
                 log(`Creating a new bot instance at ${component.serviceEndpoint}`);
 
-                const bot: IBot = new component(new teamBuilder.TeamsChatConnector(component.botSettings));
+                const adapter = new BotFrameworkAdapter(component.botSettings);
+
+                let conversationState: ConversationState;
+
+                // Create the conversation state
+                conversationState = new ConversationState(component.storage);
+
+                // generic error handler
+                adapter.onTurnError = async (context, error) => {
+                    log(`[onTurnError]: ${error}`);
+                    await context.sendActivity(`Oops. Something went wrong!`);
+                    await conversationState.delete(context);
+                };
+
+                // Create the Bot
+                const bot: IBot = new component(conversationState);
+
+                // add the Microsoft Teams middleware
+                adapter.use(new TeamsMiddleware());
+
+                // add the Messaging Extension Middleware
+                adapter.use(new MessagingExtensionMiddleware(bot));
+
                 router.post(component.serviceEndpoint, (req: any, res: any) => {
-                    return bot.Connector.listen()(req, res);
+                    adapter.processActivity(req, res, async (turnContext): Promise<any> => {
+                        try {
+                            await bot.onTurn(turnContext);
+                        } catch (err) {
+                            adapter.onTurnError(turnContext, err);
+                        }
+                    });
                 });
 
             } else if (component["isOutgoingWebhook"]) {
@@ -42,43 +73,20 @@ export const MsTeamsApiRouter = (components: any): Router => {
                 // Connector Ping endpoint
                 // POST option
                 router.post(component.pingEndpoint, (req, res) => {
-                    Promise.all(connector.Ping(req)).then((p) => {
-                        log(`Connector ping succeeded (POST)`);
-                        res.redirect("/");
-                    }).catch((reason) => {
-                        log(reason);
-                    });
+                    connector.Ping(req);
+                    res.sendStatus(202);
                 });
 
                 // GET option
                 router.get(component.pingEndpoint, (req, res) => {
-                    Promise.all(connector.Ping(req)).then((p) => {
-                        log(`Connector ping succeeded (GET)`);
-                        res.redirect("/");
-                    }).catch((reason) => {
-                        log(reason);
-                    });
-                });
-
-                // Connector connect page - used for configuration
-                router.get(component.connectEndpoint, (req, res) => {
-                    if (!req.query.state) {
-                        res.redirect("/");
-                        return;
-                    }
-                    res.render(component.connectPage, {
-                        webhookUrl: req.query.webhook_url,
-                        user: req.query.user_objectId,
-                        appType: req.query.app_type,
-                        groupName: req.query.group_name,
-                        state: req.query.state,
-                    });
+                    connector.Ping(req);
+                    res.sendStatus(202);
                 });
 
                 // Connector connect post back - used when adding the connector
                 router.post(component.connectEndpoint, (req, res) => {
                     connector.Connect(req);
-                    res.redirect(component.connectedPage);
+                    res.sendStatus(200);
                 });
 
             } else {

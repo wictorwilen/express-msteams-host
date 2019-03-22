@@ -1,23 +1,30 @@
 // Copyright (c) Wictor Wilén. All rights reserved.
 // Licensed under the MIT license.
 
-import * as builder from "botbuilder";
-import * as teamBuilder from "botbuilder-teams";
+import { TurnContext, InvokeResponse } from "botbuilder";
+import { MessagingExtensionQuery, InvokeResponseTyped, MessagingExtensionResponse } from "botbuilder-teams";
 
+/**
+ * Interface definition for Message Extensions
+ */
 export interface IMessageExtension {
-    onQuery(
-        event: builder.IEvent,
-        query: teamBuilder.ComposeExtensionQuery,
-        callback: (err: Error, result: teamBuilder.IComposeExtensionResponse, statusCode: number) => void): void;
+    /**
+     * Handler for Messaging Extension queries
+     * @param turnContext the Turn Context
+     * @param query the query
+     */
+    onQuery(turnContext: TurnContext, query: MessagingExtensionQuery): Promise<InvokeResponseTyped<MessagingExtensionResponse>>;
 
-    onQuerySettingsUrl(
-        event: builder.IEvent,
-        query: teamBuilder.ComposeExtensionQuery,
-        callback: (err: Error, result: teamBuilder.IComposeExtensionResponse, statusCode: number) => void): void;
+    /**
+     * Handler for retrieving the settings URL
+     * @param turnContext the turn context
+     */
+    onQuerySettingsUrl(turnContext: TurnContext): Promise<InvokeResponseTyped<{ composeExtension: { type: string, suggestedActions: { actions: Array<{ type: string, title: string, value: string }> } } }>>;
 
-    onSettingsUpdate(
-        event: builder.IEvent,
-        query: teamBuilder.ComposeExtensionQuery,
-        callback: (err: Error, result: teamBuilder.IComposeExtensionResponse, statusCode: number) => void): void;
+    /**
+     * Handler for updating messaging extension settings
+     * @param turnContext the turn context
+     */
+    onSettingsUpdate(turnContext: TurnContext): Promise<InvokeResponse>;
 
 }

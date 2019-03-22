@@ -9,14 +9,15 @@ import { Request } from "express";
 export interface IConnector {
     /**
      * Method used to connect the Connector to a Group/Team
+     * A successul connect returns a HTTP 200 OK
      * @param req The HTTP request (POST)
      */
     Connect(req: Request): void;
 
     /**
      * Default method for invoking the Connector
+     * HTTP succesful response should be HTTP 202 Accepted
      * @param req The HTTP request (POST or GET)
-     * @returns an array of Promises for all Connector connections
      */
-    Ping(req: Request): Array<Promise<void>>;
+    Ping(req: Request): void;
 }
