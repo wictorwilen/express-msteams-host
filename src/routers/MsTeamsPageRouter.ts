@@ -12,6 +12,11 @@ export interface IMsTeamsPageRouterOptions {
      * root location of files
      */
     root: string;
+
+    /**
+     * All components
+     */
+    components: any;
 }
 
 /**
@@ -25,27 +30,25 @@ export const MsTeamsPageRouter = (options: IMsTeamsPageRouterOptions): Router =>
     // This is used to prevent your tabs from being embedded in other systems than Microsoft Teams
     router.use((req: any, res: any, next: any) => {
         // TODO: add the current host
-        res.setHeader("Content-Security-Policy", "frame-ancestors teams.microsoft.com *.teams.microsoft.com *.skype.com *.sharepoint.com outlook.office.com " +  req.headers.host);
+        res.setHeader("Content-Security-Policy", "frame-ancestors teams.microsoft.com *.teams.microsoft.com *.skype.com *.sharepoint.com outlook.office.com " + req.headers.host);
         res.setHeader("X-Frame-Options", "ALLOW-FROM https://teams.microsoft.com/."); // IE11
         next();
     });
 
-    // Tabs (protected by the above)
-    router.get("/\*Tab.html", (req: any, res: any, next: any) => {
-        res.sendFile(path.join(options.root, req.path));
-    });
-    router.get("/\*Config.html", (req: any, res: any, next: any) => {
-        res.sendFile(path.join(options.root, req.path));
-    });
-    router.get("/\*Remove.html", (req: any, res: any, next: any) => {
-        res.sendFile(path.join(options.root, req.path));
-    });
-    router.get("/\*Connector.html", (req: any, res: any, next: any) => {
-        res.sendFile(path.join(options.root, req.path));
-    });
-    router.get("/\*ConnectorConnected.html", (req: any, res: any, next: any) => {
-        res.sendFile(path.join(options.root, req.path));
-    });
+    // Automatically read the pages to protect from the PreventIframe decorators
+    for (const app in options.components) {
+        if (options.components.hasOwnProperty(app)) {
+            const component = options.components[app];
+            if (component.__addCsp__) {
+                const arr: string[] = component.__addCsp__;
+                arr.forEach((page) => {
+                    router.get(page, (req: any, res: any, next: any) => {
+                        res.sendFile(path.join(options.root, req.path));
+                    });
+                });
+            }
+        }
+    }
 
     // Fallback
     router.use((req: any, res: any, next: any) => {

@@ -5,3 +5,4 @@ export { BotDeclaration } from "./BotDeclaration";
 export { ConnectorDeclaration } from "./ConnectorDeclaration";
 export { OutgoingWebhookDeclaration } from "./OutgoingWebhookDeclaration";
 export { MessageExtensionDeclaration } from "./MessageExtensionDeclaration";
+export { PreventIframe } from "./PreventIframe";

@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * New declarator for Messaging Extensions
 * New interface for Message Extensions
 * Added Bot Framework 4 middleware for Messaging Extensions
+* Added a new decorator for CSP policy (`PreventIframe`)
 
 ### Changes
 * Updated dependencies
@@ -21,6 +22,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Added `Storage` property to `BotDeclaration`
 * `IBot` interface changed to support new Bot Framework v4
 * `IConnector` `Ping` method updated
+* Removed CSP depending on hardcoded file names
 
 
 ### Removed

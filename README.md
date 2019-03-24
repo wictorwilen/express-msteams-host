@@ -142,6 +142,20 @@ export class myOutgoingWebhook implements IOutgoingWebhook {
 }
 ```
 
+### Preventing pages to be iframed in other applications than Microsoft Teams
+
+By using the `PreventIframe` decorator on server side classes pages can be declared to include a CSP that prohibts the pages from being
+iframed into other applications than Microsoft Teams.
+
+``` TypeScript
+import { PreventIframe } from "express-msteams-host";
+
+@PreventIframe("/page/index.html")
+export class MyPage {
+    ...
+}
+```
+
 ## Logging
 
 To enable logging from this module you need to add `msteams` to the `DEBUG` environment variable. See the [debug package](https://www.npmjs.com/package/debug) for more information.
