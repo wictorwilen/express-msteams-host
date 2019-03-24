@@ -16,12 +16,12 @@ export function BotDeclaration(
     appId: string | undefined,
     appPassword: string | undefined) {
     return (target: any) => {
-        target.isBot = true;
-        target.botSettings = <Partial<BotFrameworkAdapterSettings>>{
+        target.__isBot = true;
+        target.__botSettings = <Partial<BotFrameworkAdapterSettings>>{
             appId: appId,
             appPassword: appPassword,
         };
-        target.serviceEndpoint = endpoint;
-        target.storage = storage;
+        target.__serviceEndpoint = endpoint;
+        target.__storage = storage;
     };
 }

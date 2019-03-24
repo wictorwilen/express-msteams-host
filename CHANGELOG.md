@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [*Unreleased*] - <*2018-09-07*>
+## [*Unreleased*] - <*2019-03-24*>
 
 ### Added
 
@@ -17,16 +17,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changes
 * Updated dependencies
 * Connector declaration redefined
-* Removed *strict* TypeScript checking due to incompatibilities with botbuilder-teams/adaptivecards
 * Updated to Bot Framework v4
 * Added `Storage` property to `BotDeclaration`
 * `IBot` interface changed to support new Bot Framework v4
 * `IConnector` `Ping` method updated
 * Removed CSP depending on hardcoded file names
+* Changed internal property names for decorators to alwyas start with double underscore `__`
 
 
 ### Removed
 * Removed experiemental/preview bot implementation
+* Removed configuration property in `ConnectorDeclaration`
 
 
 ## [*1.0.1*] - <*2018-09-04*>

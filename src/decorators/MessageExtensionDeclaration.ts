@@ -8,10 +8,10 @@
 export function MessageExtensionDeclaration(name: string): PropertyDecorator {
 
     return (target: any, propertyKey: string | symbol): void => {
-        if (target._messageExtensions === undefined) {
-            target._messageExtensions = [];
+        if (target.__messageExtensions === undefined) {
+            target.__messageExtensions = [];
         }
-        target._messageExtensions.push({
+        target.__messageExtensions.push({
             propertyKey: propertyKey,
             name: name,
         });

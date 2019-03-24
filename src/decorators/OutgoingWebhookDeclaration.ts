@@ -7,7 +7,7 @@
  */
 export function OutgoingWebhookDeclaration(endpoint: string) {
     return (target: any) => {
-        target.isOutgoingWebhook = true;
-        target.serviceEndpoint = endpoint;
+        target.__isOutgoingWebhook = true;
+        target.__serviceEndpoint = endpoint;
     };
 }

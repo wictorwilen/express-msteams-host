@@ -91,7 +91,7 @@ export class myBot implements IBot {
     @MessageExtensionDeclaration('myMessageExtension')
     private _myMessageExtension: MyMessageExtension;
 
-   public constructor(conversationState: ConversationState) {
+    public constructor(conversationState: ConversationState) {
 
         this._myMessageExtension = new MyMessageExtension();
 
@@ -112,8 +112,6 @@ import { Request } from "express";
 @ConnectorDeclaration(
     '/api/connector/connect',
     '/api/connector/ping',
-    'web/myConnectorConnect.ejs',
-    '/myConnectorConnected.html'
 )
 export class myConnector implements IConnector {
     Connect(req: Request): void {

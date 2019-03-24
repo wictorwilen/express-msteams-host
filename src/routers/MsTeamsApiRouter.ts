@@ -23,15 +23,15 @@ export const MsTeamsApiRouter = (components: any): Router => {
         if (components.hasOwnProperty(app)) {
             const component = components[app];
 
-            if (component["isBot"]) {
-                log(`Creating a new bot instance at ${component.serviceEndpoint}`);
+            if (component["__isBot"]) {
+                log(`Creating a new bot instance at ${component.__serviceEndpoint}`);
 
-                const adapter = new BotFrameworkAdapter(component.botSettings);
+                const adapter = new BotFrameworkAdapter(component.__botSettings);
 
                 let conversationState: ConversationState;
 
                 // Create the conversation state
-                conversationState = new ConversationState(component.storage);
+                conversationState = new ConversationState(component.__storage);
 
                 // generic error handler
                 adapter.onTurnError = async (context, error) => {
@@ -49,7 +49,7 @@ export const MsTeamsApiRouter = (components: any): Router => {
                 // add the Messaging Extension Middleware
                 adapter.use(new MessagingExtensionMiddleware(bot));
 
-                router.post(component.serviceEndpoint, (req: any, res: any) => {
+                router.post(component.__serviceEndpoint, (req: any, res: any) => {
                     adapter.processActivity(req, res, async (turnContext): Promise<any> => {
                         try {
                             await bot.onTurn(turnContext);
@@ -59,32 +59,32 @@ export const MsTeamsApiRouter = (components: any): Router => {
                     });
                 });
 
-            } else if (component["isOutgoingWebhook"]) {
-                log(`Creating a new outgoing webhook instance at ${component.serviceEndpoint}`);
+            } else if (component["__isOutgoingWebhook"]) {
+                log(`Creating a new outgoing webhook instance at ${component.__serviceEndpoint}`);
 
                 const outgoingWebhook: IOutgoingWebhook = new component();
-                router.post(component.serviceEndpoint, outgoingWebhook.requestHandler);
+                router.post(component.__serviceEndpoint, outgoingWebhook.requestHandler);
 
-            } else if (component["isConnector"]) {
-                log(`Creating a new connector instance at ${component.connectEndpoint}`);
+            } else if (component["__isConnector"]) {
+                log(`Creating a new connector instance at ${component.__connectEndpoint}`);
 
                 const connector: IConnector = new component();
 
                 // Connector Ping endpoint
                 // POST option
-                router.post(component.pingEndpoint, (req, res) => {
+                router.post(component.__pingEndpoint, (req, res) => {
                     connector.Ping(req);
                     res.sendStatus(202);
                 });
 
                 // GET option
-                router.get(component.pingEndpoint, (req, res) => {
+                router.get(component.__pingEndpoint, (req, res) => {
                     connector.Ping(req);
                     res.sendStatus(202);
                 });
 
                 // Connector connect post back - used when adding the connector
-                router.post(component.connectEndpoint, (req, res) => {
+                router.post(component.__connectEndpoint, (req, res) => {
                     connector.Connect(req);
                     res.sendStatus(200);
                 });

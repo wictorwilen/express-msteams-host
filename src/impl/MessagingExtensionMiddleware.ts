@@ -15,7 +15,7 @@ export class MessagingExtensionMiddleware implements Middleware {
     /**
      * private property for managing messaging extensions associated with the middleware
      */
-    private MessageExtensions: Array<{ propertyKey: string, name: string }>;
+    private MessageExtensions: Array<{ propertyKey: string, name: string }> = [];
 
     /**
      * Constructor
@@ -24,7 +24,7 @@ export class MessagingExtensionMiddleware implements Middleware {
     constructor(private bot: IBot) {
         const obj = <object>this.bot;
         for (const p in obj) {
-            if (p === "_messageExtensions") {
+            if (p === "__messageExtensions") {
                 this.MessageExtensions = obj[p];
                 log(`Found ${this.MessageExtensions.length} MessagingExtension(s) on the Bot object`);
             }

@@ -10,7 +10,7 @@
     "sourceMap": true,
     "outDir": "./lib",
     "rootDir": "./src",
-    //"strict": true, // removed due to incompatibility with botbuilder-teams/adaptivecards
+    "strict": true, 
     "noImplicitAny": false,
     "noUnusedLocals": true
   }

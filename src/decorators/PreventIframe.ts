@@ -7,9 +7,9 @@
  */
 export function PreventIframe(url: string) {
     return (target: any): void => {
-        if (target.__addCsp__ === undefined) {
-            target.__addCsp__ = [];
+        if (target.__addCsp === undefined) {
+            target.__addCsp = [];
         }
-        target.__addCsp__.push(url);
+        target.__addCsp.push(url);
     };
 }
