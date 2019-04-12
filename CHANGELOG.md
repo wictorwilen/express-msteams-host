@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Added a new decorator for CSP policy (`PreventIframe`)
 
 ### Changes
+* Messaging extensions are now created using the `botbuilder-teams-messagingextensions` npm package
 * Updated dependencies
 * Connector declaration redefined
 * Updated to Bot Framework v4
@@ -28,6 +29,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 * Removed experiemental/preview bot implementation
 * Removed configuration property in `ConnectorDeclaration`
+* Removed messaging extensions interfaces and experimental middleware, this is now defined in external `botbuilder-teams-messagingextensions` npm package
 
 
 ## [*1.0.1*] - <*2018-09-04*>
