@@ -55,30 +55,7 @@ export class myBot implements IBot {
 
 ### Decorators for Message Extensions
 
-Message Extensions MUST be a class implementing the `IMessageExtension` interface and when declared in the bot implementation decorated with the `MessageExtensionDeclarator` decorator.
-
-``` TypeScript
-import { IMessageExtension } from 'express-msteams-host';
-import { TurnContext } from 'botbuilder';
-import { MessagingExtensionQuery, InvokeResponseTyped, MessagingExtensionResponse } from 'botbuilder-teams';
-
-
-export default class MyMessageExtension implements IMessageExtension {
-    public async onQuery(context: TurnContext, query: MessagingExtensionQuery): Promise<InvokeResponseTyped<MessagingExtensionResponse>> {
-       ...
-    }
-
-    // this is used when canUpdateConfiguration is set to true 
-    public async onQuerySettingsUrl(context: TurnContext): Promise<InvokeResponseTyped<{ composeExtension: { type: string, suggestedActions: { actions: Array<{ type: string, title: string, value: string }> } } }>> {
-        ...
-    }
-
-    public onSettingsUpdate(context: TurnContext): Promise<InvokeResponse> {
-       ...
-    }
-
-}
-```
+Message Extensions is implemented using the Bot Builder middleware [botbuilder-teams-messagingextensions](https://github.com/wictorwilen/botbuilder-teams-messagingextensions) and when referenced in the bot implementation decorated with the `MessageExtensionDeclarator` decorator. The `express-msteams-host` will automatically hook up the correct messaging extensions with the correct bot.
 
 In the implementation of the bot, define the message extensions as below. You are responsible for instantiating the object, you might want to add additional parameters or configuration.
 
