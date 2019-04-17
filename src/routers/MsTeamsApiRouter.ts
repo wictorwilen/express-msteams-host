@@ -5,7 +5,6 @@ import { Router } from "express";
 import { IBot } from "../interfaces/IBot";
 import { IOutgoingWebhook } from "../interfaces/IOutgoingWebhook";
 import { IConnector } from "../interfaces/IConnector";
-// import * as teamBuilder from "botbuilder-teams";
 import * as debug from "debug";
 import { BotFrameworkAdapter, ConversationState } from "botbuilder";
 import { TeamsMiddleware } from "botbuilder-teams";
@@ -43,6 +42,7 @@ export default (components: any): Router => {
                         const messageExtensions: Array<{ propertyKey: string, name: string }> = bot[p];
                         log(`Found ${messageExtensions.length} MessagingExtension(s) on the Bot object`);
                         messageExtensions.forEach( (me) => {
+                            log(`Adding Messaging extension: ${me.name}`);
                             adapter.use(new MessagingExtensionMiddleware(me.name, bot[me.propertyKey]));
                         });
                     }

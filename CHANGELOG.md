@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [*1.3.1*] - <*2019-04-17*>
+
+### Changes
+
+* Updated `botbuilder-teams-messagingextensions` npm package version
+* Updated README and inline documentation
+* Added additional logging for Message extensions
+
 ## [*1.3.0*] - <*2019-04-16*>
 
 ### Added
@@ -25,12 +33,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Removed CSP depending on hardcoded file names
 * Changed internal property names for decorators to alwyas start with double underscore `__`
 
-
 ### Removed
 * Removed experiemental/preview bot implementation
 * Removed configuration property in `ConnectorDeclaration`
 * Removed messaging extensions interfaces and experimental middleware, this is now defined in external `botbuilder-teams-messagingextensions` npm package
-
 
 ## [*1.0.1*] - <*2018-09-04*>
 

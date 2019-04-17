@@ -2,7 +2,7 @@
 
 
 [![npm version](https://badge.fury.io/js/express-msteams-host.svg)](https://www.npmjs.com/package/express-msteams-host)
-[![npm](https://img.shields.io/npm/dt/express-msteams-host.svg)]((https://www.npmjs.com/package/express-msteams-host))
+[![npm](https://img.shields.io/npm/dt/express-msteams-host.svg)](https://www.npmjs.com/package/express-msteams-host)
 [![MIT](https://img.shields.io/npm/l/express-msteams-host.svg)](https://github.com/wictorwilen/express-msteams-host/blob/master/LICENSE.md)
 [![GitHub issues](https://img.shields.io/github/issues/wictorwilen/express-msteams-host.svg)](https://github.com/wictorwilen/express-msteams-host/issues)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed/wictorwilen/express-msteams-host.svg)](https://github.com/wictorwilen/express-msteams-host/issues?q=is%3Aissue+is%3Aclosed) 
