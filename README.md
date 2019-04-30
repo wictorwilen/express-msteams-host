@@ -53,6 +53,25 @@ export class myBot implements IBot {
 }
 ```
 
+### Adding support for Calling in bots
+
+When adding calling support to bots you need to create an incoming webhook method of your bot implementation. This method should be decorated with the `BotCallingWebhook` decorator and must follow the [Express middleware signature](http://expressjs.com/en/4x/api.html#middleware-callback-function-examples). The endpoint you specify in the decorator, has to represent the calling endpoint you specify when registering the Teams Channel to your Bot in the Azure portal.
+
+``` TypeScript
+import { BotDeclaration, IBot, BotCallingWebhook } from 'express-msteams-host';
+import express = require("express");
+
+@BotDeclaration(...)
+export class myBot implements IBot {
+
+    @BotCallingWebhook("/api/calling")
+    public async onIcomingCall(req: express.Request, res: express.Response, next: express.NextFunction) {
+        ...
+    }
+}
+
+```
+
 ### Decorators for Message Extensions
 
 Message Extensions is implemented using the Bot Builder middleware [botbuilder-teams-messagingextensions](https://github.com/wictorwilen/botbuilder-teams-messagingextensions) and when referenced in the bot implementation decorated with the `MessageExtensionDeclarator` decorator. The `express-msteams-host` will automatically hook up the correct messaging extensions with the correct bot.

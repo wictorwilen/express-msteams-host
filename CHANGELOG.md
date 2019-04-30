@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [*Unreleased*]
+
+### Added
+
+* Added `BotCallingWebhook` method decorator to support webhooks for Bot calling
+* Introduction of using `reflect-metadata` for improved decorator management
+
+### Changes
+
+* Updated `botbuilder-teams-messagingextensions` npm package version to support newer features of messaging extensions
+
 ## [*1.3.1*] - <*2019-04-17*>
 
 ### Changes

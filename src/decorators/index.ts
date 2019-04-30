@@ -6,3 +6,4 @@ export { ConnectorDeclaration } from "./ConnectorDeclaration";
 export { OutgoingWebhookDeclaration } from "./OutgoingWebhookDeclaration";
 export { MessageExtensionDeclaration } from "./MessageExtensionDeclaration";
 export { PreventIframe } from "./PreventIframe";
+export { BotCallingWebhook } from "./BotCallingWebhook";

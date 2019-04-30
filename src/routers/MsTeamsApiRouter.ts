@@ -9,7 +9,11 @@ import * as debug from "debug";
 import { BotFrameworkAdapter, ConversationState } from "botbuilder";
 import { TeamsMiddleware } from "botbuilder-teams";
 import { MessagingExtensionMiddleware } from "botbuilder-teams-messagingextensions";
+import "reflect-metadata";
 
+const getMethodsNames = (obj: object) => {
+    return Object.getOwnPropertyNames(obj).filter((key) => typeof obj[key] === "function").concat(Object.getPrototypeOf(obj) ? getMethodsNames(Object.getPrototypeOf(obj)) : []);
+}
 /**
  * Express router for Microsoft Teams Connectors, Bots and Outgoing Webhooks
  * @param components Imported module with all implementations
@@ -41,13 +45,14 @@ export default (components: any): Router => {
                     if (p === "__messageExtensions") {
                         const messageExtensions: Array<{ propertyKey: string, name: string }> = bot[p];
                         log(`Found ${messageExtensions.length} MessagingExtension(s) on the Bot object`);
-                        messageExtensions.forEach( (me) => {
+                        messageExtensions.forEach((me) => {
                             log(`Adding Messaging extension: ${me.name}`);
                             adapter.use(new MessagingExtensionMiddleware(me.name, bot[me.propertyKey]));
                         });
                     }
                 }
 
+                // add the bot to the router
                 router.post(component.__serviceEndpoint, (req: any, res: any) => {
                     adapter.processActivity(req, res, async (turnContext): Promise<any> => {
                         try {
@@ -57,6 +62,15 @@ export default (components: any): Router => {
                         }
                     });
                 });
+
+                getMethodsNames(bot).forEach((m: string) => {
+                    if (Reflect.hasMetadata("msteams:calling", bot, m)) {
+                        const path = Reflect.getMetadata("msteams:calling", bot, m);
+                        log(`Adding Bot Calling webhook at ${path}`);
+                        router.post(path, bot[m]);
+                    }
+                });
+
             } else if (component["__isOutgoingWebhook"]) {
                 log(`Creating a new outgoing webhook instance at ${component.__serviceEndpoint}`);
                 const outgoingWebhook: IOutgoingWebhook = new component();
