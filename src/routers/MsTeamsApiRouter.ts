@@ -37,7 +37,7 @@ export default (components: any): Router => {
                     await conversationState.delete(context);
                 };
                 // Create the Bot
-                const bot: IBot = new component(conversationState);
+                const bot: IBot = new component(conversationState, adapter);
                 // add the Microsoft Teams middleware
                 adapter.use(new TeamsMiddleware());
                 // add the Messaging Extension Middleware

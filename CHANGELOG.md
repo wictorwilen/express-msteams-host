@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changes
 
 * Updated `botbuilder-teams-messagingextensions` npm package version to support newer features of messaging extensions
+* The bot classes are now instatiated with one additional parameter (`BotFrameworkAdapter`)
 
 ## [*1.3.1*] - <*2019-04-17*>
 
