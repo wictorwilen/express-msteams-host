@@ -13,7 +13,8 @@ import "reflect-metadata";
 
 const getMethodsNames = (obj: object) => {
     return Object.getOwnPropertyNames(obj).filter((key) => typeof obj[key] === "function").concat(Object.getPrototypeOf(obj) ? getMethodsNames(Object.getPrototypeOf(obj)) : []);
-}
+};
+
 /**
  * Express router for Microsoft Teams Connectors, Bots and Outgoing Webhooks
  * @param components Imported module with all implementations
