@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changes
 
 * Updated version reference for `botbuilder-teams-messagingextensions`
+* Changed bot framework adapter from generic adapter to `TeamsAdapter`
 
 
 ## [*1.4.1*] - <*2019-05-07*>

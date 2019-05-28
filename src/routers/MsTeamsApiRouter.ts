@@ -6,8 +6,8 @@ import { IBot } from "../interfaces/IBot";
 import { IOutgoingWebhook } from "../interfaces/IOutgoingWebhook";
 import { IConnector } from "../interfaces/IConnector";
 import * as debug from "debug";
-import { BotFrameworkAdapter, ConversationState } from "botbuilder";
-import { TeamsMiddleware } from "botbuilder-teams";
+import { ConversationState } from "botbuilder";
+import { TeamsMiddleware, TeamsAdapter } from "botbuilder-teams";
 import { MessagingExtensionMiddleware } from "botbuilder-teams-messagingextensions";
 import "reflect-metadata";
 
@@ -27,7 +27,7 @@ export default (components: any): Router => {
             const component = components[app];
             if (component["__isBot"]) {
                 log(`Creating a new bot instance at ${component.__serviceEndpoint}`);
-                const adapter = new BotFrameworkAdapter(component.__botSettings);
+                const adapter = new TeamsAdapter(component.__botSettings);
                 let conversationState: ConversationState;
                 // Create the conversation state
                 conversationState = new ConversationState(component.__storage);
