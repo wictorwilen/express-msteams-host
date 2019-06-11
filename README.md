@@ -82,6 +82,7 @@ In the implementation of the bot, define the message extensions as below. You ar
 import { BotDeclaration, IBot } from 'express-msteams-host';
 import { MemoryStorage, ConversationState, TurnContext } from 'botbuilder';
 import { MyMessageExtension } from './MyMessageExtension';
+import { TeamsAdapter } from "botbuilder-teams";
 
 @BotDeclaration(
     '/api/messages',
@@ -93,7 +94,7 @@ export class myBot implements IBot {
     @MessageExtensionDeclaration('myMessageExtension')
     private _myMessageExtension: MyMessageExtension;
 
-    public constructor(conversationState: ConversationState) {
+    public constructor(private conversationState: ConversationState, private adapter: TeamsAdapter) {
 
         this._myMessageExtension = new MyMessageExtension();
 

@@ -1,7 +1,16 @@
 // Copyright (c) Wictor Wilén. All rights reserved.
 // Licensed under the MIT license.
 
-import { BotFrameworkAdapterSettings, Storage } from "botbuilder";
+import { Storage } from "botbuilder";
+import "reflect-metadata";
+
+export interface IBotDeclarationSettings {
+    endpoint: string;
+    storage: Storage;
+    appId: string | undefined;
+    appPassword: string | undefined;
+    namespace?: string | undefined;
+}
 
 /**
  * Decorator function for Bots
@@ -9,19 +18,14 @@ import { BotFrameworkAdapterSettings, Storage } from "botbuilder";
  * @param storage The Storage to use for the bot (ex: new MemoryStorage())
  * @param appId The App Id for the bot
  * @param appPassword The app password for the bot
+ * @param namespace (Optional) Namespace to be appended to storage keys, defaults to empty string
  */
 export function BotDeclaration(
     endpoint: string,
     storage: Storage,
     appId: string | undefined,
-    appPassword: string | undefined) {
-    return (target: any) => {
-        target.__isBot = true;
-        target.__botSettings = <Partial<BotFrameworkAdapterSettings>>{
-            appId: appId,
-            appPassword: appPassword,
-        };
-        target.__serviceEndpoint = endpoint;
-        target.__storage = storage;
-    };
+    appPassword: string | undefined,
+    namespace?: string | undefined) {
+    // tslint:disable-next-line: ban-types
+    return (target: Function) => Reflect.defineMetadata("msteams:bot", <IBotDeclarationSettings>{ endpoint, storage, appId, appPassword, namespace }, target);
 }

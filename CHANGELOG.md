@@ -11,7 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 * Updated version reference for `botbuilder-teams-messagingextensions`
 * Changed bot framework adapter from generic adapter to `TeamsAdapter`
-
+* Updated the `BotDeclarator` implementation to use `reflect-metadata` and strict constructor checking
+* Modified `MessagingExtensionDeclarator` so that it supports `undefined` as argument, for catch-all scenearios 
 
 ## [*1.4.1*] - <*2019-05-07*>
 

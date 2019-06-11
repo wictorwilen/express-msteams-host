@@ -10,6 +10,7 @@ import { ConversationState } from "botbuilder";
 import { TeamsMiddleware, TeamsAdapter } from "botbuilder-teams";
 import { MessagingExtensionMiddleware } from "botbuilder-teams-messagingextensions";
 import "reflect-metadata";
+import { IBotDeclarationSettings } from "../decorators/BotDeclaration";
 
 const getMethodsNames = (obj: object) => {
     return Object.getOwnPropertyNames(obj).filter((key) => typeof obj[key] === "function").concat(Object.getPrototypeOf(obj) ? getMethodsNames(Object.getPrototypeOf(obj)) : []);
@@ -25,12 +26,17 @@ export default (components: any): Router => {
     for (const app in components) {
         if (components.hasOwnProperty(app)) {
             const component = components[app];
-            if (component["__isBot"]) {
-                log(`Creating a new bot instance at ${component.__serviceEndpoint}`);
-                const adapter = new TeamsAdapter(component.__botSettings);
+            if (Reflect.hasMetadata("msteams:bot", component)) {
+                const botSettings: IBotDeclarationSettings = Reflect.getMetadata("msteams:bot", component);
+                // if (component["__isBot"]) {
+                log(`Creating a new bot instance at ${botSettings.endpoint}`);
+                const adapter = new TeamsAdapter({
+                    appId: botSettings.appId,
+                    appPassword: botSettings.appPassword,
+                });
                 let conversationState: ConversationState;
                 // Create the conversation state
-                conversationState = new ConversationState(component.__storage);
+                conversationState = new ConversationState(botSettings.storage, botSettings.namespace);
                 // generic error handler
                 adapter.onTurnError = async (context, error) => {
                     log(`[onTurnError]: ${error}`);
@@ -54,7 +60,7 @@ export default (components: any): Router => {
                 }
 
                 // add the bot to the router
-                router.post(component.__serviceEndpoint, (req: any, res: any) => {
+                router.post(botSettings.endpoint, (req: any, res: any) => {
                     adapter.processActivity(req, res, async (turnContext): Promise<any> => {
                         try {
                             await bot.onTurn(turnContext);
