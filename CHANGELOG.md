@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changes
 
 * Fixed an issue where `this` was not correctly bound for incoming calls to the bot
+* Node 6 no longer supported
 
 ## [*1.5.1*] - <*2019-06-14*>
 
