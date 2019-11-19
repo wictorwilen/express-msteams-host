@@ -74,7 +74,9 @@ export default (components: any): Router => {
                     if (Reflect.hasMetadata("msteams:calling", bot, m)) {
                         const path = Reflect.getMetadata("msteams:calling", bot, m);
                         log(`Adding Bot Calling webhook at ${path}`);
-                        router.post(path, bot[m]);
+                        router.post(path, (req, res) => {
+                            bot[m](req, res);
+                        });
                     }
                 });
 

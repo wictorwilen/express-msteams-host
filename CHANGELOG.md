@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [*1.5.2*] - <*2019-11-19*>
+
+### Changes
+
+* Fixed an issue where `this` was not correctly bound for incoming calls to the bot
+
 ## [*1.5.1*] - <*2019-06-14*>
 
 ### Changes
