@@ -6,8 +6,8 @@ import { IBot } from "../interfaces/IBot";
 import { IOutgoingWebhook } from "../interfaces/IOutgoingWebhook";
 import { IConnector } from "../interfaces/IConnector";
 import * as debug from "debug";
-import { ConversationState } from "botbuilder";
-import { TeamsMiddleware, TeamsAdapter } from "botbuilder-teams";
+import { BotFrameworkAdapter } from "botbuilder";
+import { ConversationState } from "botbuilder-core";
 import { MessagingExtensionMiddleware } from "botbuilder-teams-messagingextensions";
 import "reflect-metadata";
 import { IBotDeclarationSettings } from "../decorators/BotDeclaration";
@@ -30,7 +30,7 @@ export default (components: any): Router => {
                 const botSettings: IBotDeclarationSettings = Reflect.getMetadata("msteams:bot", component);
                 // if (component["__isBot"]) {
                 log(`Creating a new bot instance at ${botSettings.endpoint}`);
-                const adapter = new TeamsAdapter({
+                const adapter = new BotFrameworkAdapter({
                     appId: botSettings.appId,
                     appPassword: botSettings.appPassword,
                 });
@@ -45,8 +45,7 @@ export default (components: any): Router => {
                 };
                 // Create the Bot
                 const bot: IBot = new component(conversationState, adapter);
-                // add the Microsoft Teams middleware
-                adapter.use(new TeamsMiddleware());
+
                 // add the Messaging Extension Middleware
                 for (const p in bot) {
                     if (p === "__messageExtensions") {
