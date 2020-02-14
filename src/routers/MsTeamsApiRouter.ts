@@ -2,12 +2,11 @@
 // Licensed under the MIT license.
 
 import { Router } from "express";
-import { IBot } from "../interfaces/IBot";
 import { IOutgoingWebhook } from "../interfaces/IOutgoingWebhook";
 import { IConnector } from "../interfaces/IConnector";
 import * as debug from "debug";
 import { BotFrameworkAdapter } from "botbuilder";
-import { ConversationState } from "botbuilder-core";
+import { ConversationState, ActivityHandler } from "botbuilder-core";
 import { MessagingExtensionMiddleware } from "botbuilder-teams-messagingextensions";
 import "reflect-metadata";
 import { IBotDeclarationSettings } from "../decorators/BotDeclaration";
@@ -44,7 +43,7 @@ export default (components: any): Router => {
                     await conversationState.delete(context);
                 };
                 // Create the Bot
-                const bot: IBot = new component(conversationState, adapter);
+                const bot: ActivityHandler = new component(conversationState, adapter);
 
                 // add the Messaging Extension Middleware
                 for (const p in bot) {
@@ -62,7 +61,7 @@ export default (components: any): Router => {
                 router.post(botSettings.endpoint, (req: any, res: any) => {
                     adapter.processActivity(req, res, async (turnContext): Promise<any> => {
                         try {
-                            await bot.onTurn(turnContext);
+                            await bot.run(turnContext);
                         } catch (err) {
                             adapter.onTurnError(turnContext, err);
                         }

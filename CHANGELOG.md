@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changes
 
 * Migrated to `botbuilder@4.7.1`
+* Bots should be extending `ActivityHandler` instead of implementing the removed `IBot` interface
+
+### Removed
+
+* Removed the `IBot` interface
 
 ## [*1.5.2*] - <*2019-11-19*>
 
