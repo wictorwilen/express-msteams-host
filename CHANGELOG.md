@@ -5,12 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [*Unreleased*]
+## [*1.6.0*] - <*2020-03-05*>
 
 ### Changes
 
 * Migrated to `botbuilder@4.7.1`
-* Bots should be extending `ActivityHandler` instead of implementing the removed `IBot` interface
+* Bots should be extending `ActivityHandler` instead of implementing the removed `IBot` interface (breaking change)
 
 ### Removed
 
