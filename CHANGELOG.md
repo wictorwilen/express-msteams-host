@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [*Unreleased*]
+
+### Fixes
+
+* Fixed an issue where arrow functions was not used, preserving `this`, for Outgoing webhooks (PR #2)
+
 ## [*1.6.0*] - <*2020-03-05*>
 
 ### Changes
