@@ -81,7 +81,7 @@ export default (components: any): Router => {
             } else if (component["__isOutgoingWebhook"]) {
                 log(`Creating a new outgoing webhook instance at ${component.__serviceEndpoint}`);
                 const outgoingWebhook: IOutgoingWebhook = new component();
-                router.post(component.__serviceEndpoint, outgoingWebhook.requestHandler);
+                router.post(component.__serviceEndpoint, outgoingWebhook.requestHandler.bind(outgoingWebhook));
             } else if (component["__isConnector"]) {
                 log(`Creating a new connector instance at ${component.__connectEndpoint}`);
                 const connector: IConnector = new component();
