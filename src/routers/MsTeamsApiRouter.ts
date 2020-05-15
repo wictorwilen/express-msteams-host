@@ -21,7 +21,7 @@ const getMethodsNames = (obj: object) => {
  */
 export default (components: any): Router => {
     const router = Router();
-    const log = debug("msteams");
+    const log = debug.default("msteams");
     for (const app in components) {
         if (components.hasOwnProperty(app)) {
             const component = components[app];

@@ -26,12 +26,12 @@ export interface IMsTeamsPageRouterOptions {
  */
 export const MsTeamsPageRouter = (options: IMsTeamsPageRouterOptions): Router => {
     const router = Router();
-    const log = debug("msteams");
+    const log = debug.default("msteams");
 
     // This is used to prevent your tabs from being embedded in other systems than Microsoft Teams
     router.use((req: any, res: any, next: any) => {
         // TODO: add the current host
-        res.setHeader("Content-Security-Policy", "frame-ancestors teams.microsoft.com *.teams.microsoft.com *.skype.com *.sharepoint.com outlook.office.com " + req.headers.host);
+        res.setHeader("Content-Security-Policy", "frame-ancestors 'self' teams.microsoft.com *.teams.microsoft.com *.skype.com *.sharepoint.com outlook.office.com *.teams.microsoft.us local.teams.office.com" + req.headers.host);
         res.setHeader("X-Frame-Options", "ALLOW-FROM https://teams.microsoft.com/."); // IE11
         next();
     });
@@ -45,7 +45,7 @@ export const MsTeamsPageRouter = (options: IMsTeamsPageRouterOptions): Router =>
                 if (arr.length) {
                     arr.forEach((page) => {
                         log(`Adding CSP policy for ${page}`);
-                        router.get(page, (req: any, res: any, next: any) => {
+                        router.get(page, (req: any, res: any) => {
                             res.sendFile(path.join(options.root, req.path));
                         });
                     });

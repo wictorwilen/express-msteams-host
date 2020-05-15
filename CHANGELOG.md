@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [*Unreleased*]
+
+### Changes
+
+* Updated dev dependencies
+
+### Fixes
+
+* Updated `"Content-Security-Policy` to support US Government GCC and DoD endpoints
+
 ## [*1.6.1*] - <*2020-04-22*>
 
 ### Fixes

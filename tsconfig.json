@@ -1,19 +1,27 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "target": "es5",
     "module": "commonjs",
+    "target": "es5",
     "lib": [
-      "es2015",
-      "dom"
+      "dom",
+      "dom.iterable",
+      "esnext"
     ],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "allowUnreachableCode": false,
+    "jsx": "react",
     "declaration": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "outDir": "./lib",
     "rootDir": "./src",
-    "strict": true,
-    "noImplicitAny": false,
-    "noUnusedLocals": true
+    "removeComments": false
   }
 }
