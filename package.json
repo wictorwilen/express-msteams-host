@@ -45,7 +45,7 @@
   "dependencies": {
     "botbuilder": "4.7.1",
     "botbuilder-core": "4.7.1",
-    "botbuilder-teams-messagingextensions": "~1.6.0-preview",
+    "botbuilder-teams-messagingextensions": "~1.6.0",
     "debug": "4.1.1",
     "express": "4.16.4",
     "reflect-metadata": "^0.1.13"
