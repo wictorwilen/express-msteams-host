@@ -9,6 +9,8 @@ export interface IBotDeclarationSettings {
     storage: Storage;
     appId: string | undefined;
     appPassword: string | undefined;
+    certificatePrivateKey?: string | undefined;
+    certificateThumbprint?: string | undefined;
     namespace?: string | undefined;
 }
 
@@ -18,6 +20,8 @@ export interface IBotDeclarationSettings {
  * @param storage The Storage to use for the bot (ex: new MemoryStorage())
  * @param appId The App Id for the bot
  * @param appPassword The app password for the bot
+ * @param certificatePrivateKey (Optional) Client Certificate Credential - PK
+ * @param certificateThumbprint (Optional) Client Certificate Credential - TP
  * @param namespace (Optional) Namespace to be appended to storage keys, defaults to empty string
  */
 export function BotDeclaration(
@@ -25,7 +29,9 @@ export function BotDeclaration(
     storage: Storage,
     appId: string | undefined,
     appPassword: string | undefined,
+    certificatePrivateKey?: string | undefined,
+    certificateThumbprint?: string | undefined,
     namespace?: string | undefined) {
     // tslint:disable-next-line: ban-types
-    return (target: Function) => Reflect.defineMetadata("msteams:bot", <IBotDeclarationSettings>{ endpoint, storage, appId, appPassword, namespace }, target);
+    return (target: Function) => Reflect.defineMetadata("msteams:bot", <IBotDeclarationSettings>{ endpoint, storage, appId, appPassword, certificatePrivateKey, certificateThumbprint, namespace }, target);
 }
