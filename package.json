@@ -1,6 +1,6 @@
 {
   "name": "express-msteams-host",
-  "version": "1.6.2",
+  "version": "1.7.0-preview2",
   "description": "Express utility for Microsoft Teams solutions",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -32,7 +32,8 @@
   },
   "homepage": "https://github.com/wictorwilen/express-msteams-host",
   "contributors": [
-    "Mommers, Laurence <https://github.com/LaurenceMommers>"
+    "Mommers, Laurence <https://github.com/LaurenceMommers>",
+    "Plets, Felipe <https://github.com/felipeplets>"
   ],
   "license": "MIT",
   "devDependencies": {
