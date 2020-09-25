@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changes
 
 * Bot Framework dependencies updated (PR #10)
+* `BotDeclaration` now supports dynamically loaded parameters by supporting functions that return strings
 
 ### Added
 

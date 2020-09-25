@@ -30,10 +30,10 @@ export default (components: any): Router => {
                 // if (component["__isBot"]) {
                 log(`Creating a new bot instance at ${botSettings.endpoint}`);
                 const adapter = new BotFrameworkAdapter({
-                    appId: botSettings.appId,
-                    appPassword: botSettings.appPassword,
-                    certificatePrivateKey: botSettings.certificatePrivateKey,
-                    certificateThumbprint: botSettings.certificateThumbprint
+                    appId: typeof botSettings.appId === "function" ? botSettings.appId() : botSettings.appId,
+                    appPassword: typeof botSettings.appPassword === "function" ? botSettings.appPassword() : botSettings.appPassword,
+                    certificatePrivateKey: typeof botSettings.certificatePrivateKey === "function"? botSettings.certificatePrivateKey() : botSettings.certificatePrivateKey,
+                    certificateThumbprint: typeof botSettings.certificateThumbprint === "function" ? botSettings.certificateThumbprint() : botSettings.certificateThumbprint
                 });
                 let conversationState: ConversationState;
                 // Create the conversation state
@@ -50,7 +50,7 @@ export default (components: any): Router => {
                 // add the Messaging Extension Middleware
                 for (const p in bot) {
                     if (p === "__messageExtensions") {
-                        const messageExtensions: Array<{ propertyKey: string, name: string }> = bot[p];
+                        const messageExtensions: { propertyKey: string, name: string }[] = bot[p];
                         log(`Found ${messageExtensions.length} MessagingExtension(s) on the Bot object`);
                         messageExtensions.forEach((me) => {
                             log(`Adding Messaging extension: ${me.name}`);
