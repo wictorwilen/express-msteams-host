@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changes
 
-* Updated to bot framework `^4.9.0`
+* Bot Framework dependencies updated (PR #10)
+
+### Added
+
+* Support form certificate based auth for Bots (PR #6)
 
 ## [*1.6.2*] - <*2020-05-17*>
 
