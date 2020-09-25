@@ -13,5 +13,5 @@ export interface IOutgoingWebhook {
      * @param res The Express HTTP response
      * @param next The Express next function
      */
-    requestHandler(req: Express.Request, res: Express.Response, next: Express.NextFunction);
+    requestHandler(req: Express.Request, res: Express.Response, next: Express.NextFunction): any;
 }

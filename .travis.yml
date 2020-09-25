@@ -1,13 +1,36 @@
 branches:
   only:
-    - master
-    - preview
+  - master
+  - preview
 sudo: false
 language: node_js
 cache:
   directories:
   - node_modules
 node_js:
-  - 'stable'
-  - '6.9.1'
-script: "npm run build"
+- stable
+- 8.15.0
+- 10.15.3
+- 12.14.1
+script: npm run build
+
+jobs:
+  include:
+    - stage: npm release
+      node_js: stable
+      deploy:
+        - provider: npm
+          edge: true
+          email: "$NPM_EMAIL"
+          api_key: "$NPM_TOKEN"
+          skip_cleanup: true
+          tag: preview
+          on:
+            branch: preview
+        - provider: npm
+          edge: true
+          email: "$NPM_EMAIL"
+          api_key: "$NPM_TOKEN"
+          skip_cleanup: true
+          on:
+            branch: master    

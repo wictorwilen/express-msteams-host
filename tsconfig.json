@@ -1,14 +1,21 @@
 {
   "compilerOptions": {
-    "target": "es5",
     "module": "commonjs",
-    "lib": ["es2015"],
+    "target": "es5",
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "allowUnreachableCode": false,
+    "jsx": "react",
     "declaration": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "outDir": "./lib",
     "rootDir": "./src",
-    "strict": true,
-    "noImplicitAny": false,
-    "noUnusedLocals": true
+    "removeComments": false
   }
 }
