@@ -33,7 +33,8 @@
   "homepage": "https://github.com/wictorwilen/express-msteams-host",
   "contributors": [
     "Mommers, Laurence <https://github.com/LaurenceMommers>",
-    "Plets, Felipe <https://github.com/felipeplets>"
+    "Plets, Felipe <https://github.com/felipeplets>",
+    "Franco, Mark <https://github.com/MTCMarkFranco>"
   ],
   "license": "MIT",
   "devDependencies": {
@@ -41,7 +42,7 @@
     "@types/express": "4.17.8",
     "@types/node": "14.11.1",
     "tslint": "6.1.3",
-    "typescript": "4.0.2"
+    "typescript": "4.0.3"
   },
   "dependencies": {
     "botbuilder": "^4.7.1",

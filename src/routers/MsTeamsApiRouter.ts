@@ -32,6 +32,8 @@ export default (components: any): Router => {
                 const adapter = new BotFrameworkAdapter({
                     appId: botSettings.appId,
                     appPassword: botSettings.appPassword,
+                    certificatePrivateKey: botSettings.certificatePrivateKey,
+                    certificateThumbprint: botSettings.certificateThumbprint
                 });
                 let conversationState: ConversationState;
                 // Create the conversation state
