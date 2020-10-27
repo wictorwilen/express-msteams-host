@@ -1,6 +1,6 @@
 {
   "name": "express-msteams-host",
-  "version": "1.7.0-preview2",
+  "version": "1.7.0",
   "description": "Express utility for Microsoft Teams solutions",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -47,7 +47,7 @@
   "dependencies": {
     "botbuilder": "^4.7.1",
     "botbuilder-core": "^4.7.1",
-    "botbuilder-teams-messagingextensions": "^1.6.0",
+    "botbuilder-teams-messagingextensions": "^1.7.0",
     "debug": "^4.1.1",
     "express": "^4.16.4",
     "reflect-metadata": "^0.1.13"
