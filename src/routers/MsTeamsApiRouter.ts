@@ -23,7 +23,7 @@ export default (components: any): Router => {
     const router = Router();
     const log = debug.default("msteams");
     for (const app in components) {
-        if (components.hasOwnProperty(app)) {
+        if (Object.prototype.hasOwnProperty.call(components, app)) {
             const component = components[app];
             if (Reflect.hasMetadata("msteams:bot", component)) {
                 const botSettings: IBotDeclarationSettings = Reflect.getMetadata("msteams:bot", component);
@@ -32,19 +32,20 @@ export default (components: any): Router => {
                 const adapter = new BotFrameworkAdapter({
                     appId: typeof botSettings.appId === "function" ? botSettings.appId() : botSettings.appId,
                     appPassword: typeof botSettings.appPassword === "function" ? botSettings.appPassword() : botSettings.appPassword,
-                    certificatePrivateKey: typeof botSettings.certificatePrivateKey === "function"? botSettings.certificatePrivateKey() : botSettings.certificatePrivateKey,
+                    certificatePrivateKey: typeof botSettings.certificatePrivateKey === "function" ? botSettings.certificatePrivateKey() : botSettings.certificatePrivateKey,
                     certificateThumbprint: typeof botSettings.certificateThumbprint === "function" ? botSettings.certificateThumbprint() : botSettings.certificateThumbprint
                 });
-                let conversationState: ConversationState;
                 // Create the conversation state
-                conversationState = new ConversationState(botSettings.storage, botSettings.namespace);
+                const conversationState: ConversationState = new ConversationState(botSettings.storage, botSettings.namespace);
+
                 // generic error handler
                 adapter.onTurnError = async (context, error) => {
                     log(`[onTurnError]: ${error}`);
-                    await context.sendActivity(`Oops. Something went wrong!`);
+                    await context.sendActivity("Oops. Something went wrong!");
                     await conversationState.delete(context);
                 };
                 // Create the Bot
+                // eslint-disable-next-line new-cap
                 const bot: ActivityHandler = new component(conversationState, adapter);
 
                 // add the Messaging Extension Middleware
@@ -80,14 +81,16 @@ export default (components: any): Router => {
                     }
                 });
 
-            } else if (component["__isOutgoingWebhook"]) {
+            } else if (component.__isOutgoingWebhook) {
                 log(`Creating a new outgoing webhook instance at ${component.__serviceEndpoint}`);
+                // eslint-disable-next-line new-cap
                 const outgoingWebhook: IOutgoingWebhook = new component();
                 router.post(component.__serviceEndpoint, (req, res, next) => {
                     outgoingWebhook.requestHandler(req, res, next);
                 });
-            } else if (component["__isConnector"]) {
+            } else if (component.__isConnector) {
                 log(`Creating a new connector instance at ${component.__connectEndpoint}`);
+                // eslint-disable-next-line new-cap
                 const connector: IConnector = new component();
                 // Connector Ping endpoint
                 // POST option

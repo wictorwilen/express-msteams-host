@@ -38,7 +38,7 @@ export const MsTeamsPageRouter = (options: IMsTeamsPageRouterOptions): Router =>
 
     // Automatically read the pages to protect from the PreventIframe decorators
     for (const app in options.components) {
-        if (options.components.hasOwnProperty(app)) {
+        if (Object.prototype.hasOwnProperty.call(options.components, app)) {
             const component = options.components[app];
             if (component.__addCsp) {
                 const arr: string[] = component.__addCsp;
