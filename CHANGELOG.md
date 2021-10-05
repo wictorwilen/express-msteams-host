@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 * Unit testing
 
+### Fixed
+
+* Fixed in assue with CSP where the current host was not added correctly
+
 ### Changes
 
 * **BREAKING**: Upgraded to `botbuilder` version `4.14.1` as minumum version

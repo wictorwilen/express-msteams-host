@@ -1,25 +1,14 @@
 module.exports = {
-    name: "lib",
-    displayName: "express-msteams-host",
-    rootDir: "./",
-    testEnvironment: "node",
-    globals: {
-        "ts-jest": {
-            tsconfig: "<rootDir>/tsconfig.json",
-            diagnostics: {
-                ignoreCodes: []
-            }
-        }
+    roots: ["<rootDir>/src"],
+    transform: {
+        "^.+\\.tsx?$": "ts-jest"
     },
-    preset: "ts-jest/presets/js-with-ts",
-    testMatch: [
-        "<rootDir>/src/**/*.spec.(ts|tsx|js)"
-    ],
+    testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+    moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+
+    coverageDirectory: "coverage",
     collectCoverageFrom: [
-        "/**/*.{js,jsx,ts,tsx}",
-        "!<rootDir>/node_modules/"
-    ],
-    coverageReporters: [
-        "text", "html"
+        "src/**/*.{ts,js}",
+        "!src/**/*.d.ts"
     ]
 };

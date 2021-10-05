@@ -13,3 +13,4 @@ jest.config.js
 junit.xml
 coverage
 .github
+test
