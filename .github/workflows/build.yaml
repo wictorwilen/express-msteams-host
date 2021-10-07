@@ -22,7 +22,7 @@ jobs:
     - run: npm run test
     - uses: codecov/codecov-action@v2
       with:
-        directory: ./coverage1
+        directory: ./coverage
         flags: unittests 
         fail_ci_if_error: true
     - run: npm run build
