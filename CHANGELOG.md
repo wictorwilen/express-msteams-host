@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 * Unit testing
+* Github code coverage integration
 
 ### Fixed
 
