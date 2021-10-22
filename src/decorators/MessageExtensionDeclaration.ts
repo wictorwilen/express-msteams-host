@@ -13,7 +13,7 @@ export function MessageExtensionDeclaration(name?: string): PropertyDecorator {
         }
         target.__messageExtensions.push({
             propertyKey,
-            name,
+            name
         });
     };
 }

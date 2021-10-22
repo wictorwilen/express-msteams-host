@@ -9,8 +9,8 @@ export interface IBotDeclarationSettings {
     storage: Storage;
     appId: string | undefined | (() => string);
     appPassword: string | undefined | (() => string);
-    certificatePrivateKey?: string | undefined  | (() => string);
-    certificateThumbprint?: string | undefined  | (() => string);
+    certificatePrivateKey?: string | undefined | (() => string);
+    certificateThumbprint?: string | undefined | (() => string);
     namespace?: string | undefined;
 }
 

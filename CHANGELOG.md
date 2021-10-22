@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [*1.8.0*] - <*2021-10-22*>
+
+### Added
+
+* Unit testing
+* Github code coverage integration
+
+### Fixed
+
+* Fixed in assue with CSP where the current host was not added correctly
+
+### Changes
+
+* **BREAKING**: Upgraded to `botbuilder` version `4.14.1` as minumum version
+* Dependency bump
+* Moved to Github actions
+* Moved to ESLint
+
 ## [*1.7.0*] - <*2020-10-27*>
 
 ### Changes

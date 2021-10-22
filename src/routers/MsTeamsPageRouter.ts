@@ -30,15 +30,14 @@ export const MsTeamsPageRouter = (options: IMsTeamsPageRouterOptions): Router =>
 
     // This is used to prevent your tabs from being embedded in other systems than Microsoft Teams
     router.use((req: any, res: any, next: any) => {
-        // TODO: add the current host
-        res.setHeader("Content-Security-Policy", "frame-ancestors 'self' teams.microsoft.com *.teams.microsoft.com *.skype.com *.sharepoint.com outlook.office.com *.teams.microsoft.us local.teams.office.com" + req.headers.host);
+        res.setHeader("Content-Security-Policy", "frame-ancestors 'self' teams.microsoft.com *.teams.microsoft.com *.skype.com *.sharepoint.com outlook.office.com *.teams.microsoft.us local.teams.office.com " + req.headers.host);
         res.setHeader("X-Frame-Options", "ALLOW-FROM https://teams.microsoft.com/."); // IE11
         next();
     });
 
     // Automatically read the pages to protect from the PreventIframe decorators
     for (const app in options.components) {
-        if (options.components.hasOwnProperty(app)) {
+        if (Object.prototype.hasOwnProperty.call(options.components, app)) {
             const component = options.components[app];
             if (component.__addCsp) {
                 const arr: string[] = component.__addCsp;
