@@ -1,6 +1,6 @@
 {
   "name": "express-msteams-host",
-  "version": "1.9.0-preview",
+  "version": "1.9.0-preview2",
   "description": "Express utility for Microsoft Teams solutions",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

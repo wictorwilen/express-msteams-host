@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changes
 
 * **BREAKING**: Added user state to classes marked with the `BotDeclaration` decorator. Class is instantiated with the following arguments: `(ConversationState, UserState, BotFrameworkAdapter)`
+* Added `*.office.com` to CSP header for pages
 
 ## [*1.8.0*] - <*2021-10-22*>
 
