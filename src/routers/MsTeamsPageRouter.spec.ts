@@ -34,14 +34,14 @@ describe("MsTeamsPageRouter", () => {
         expect(response.headers["Content-Security-Policy"]).toBeUndefined();
     });
 
-    it("Shoudl return 200, with CSP", async () => {
+    it("Should return 200, with CSP", async () => {
         const req = request(app);
         const response = await req.get("/test.html");
         expect(response).toBeDefined();
         expect(response.statusCode).toEqual(200);
         // console.log(JSON.stringify(response));
         const host = (response as any).request.host;
-        expect(response.headers["content-security-policy"]).toEqual("frame-ancestors 'self' teams.microsoft.com *.teams.microsoft.com *.skype.com *.sharepoint.com outlook.office.com *.teams.microsoft.us local.teams.office.com " + host);
+        expect(response.headers["content-security-policy"]).toEqual("frame-ancestors 'self' teams.microsoft.com *.teams.microsoft.com *.skype.com *.sharepoint.com outlook.office.com *.teams.microsoft.us local.teams.office.com *.office.com " + host);
     });
 
 });

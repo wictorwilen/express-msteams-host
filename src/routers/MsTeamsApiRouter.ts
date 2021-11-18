@@ -6,7 +6,7 @@ import { IOutgoingWebhook } from "../interfaces/IOutgoingWebhook";
 import { IConnector } from "../interfaces/IConnector";
 import * as debug from "debug";
 import { BotFrameworkAdapter } from "botbuilder";
-import { ConversationState, ActivityHandler } from "botbuilder-core";
+import { ConversationState, ActivityHandler, UserState } from "botbuilder-core";
 import { MessagingExtensionMiddleware } from "botbuilder-teams-messagingextensions";
 import "reflect-metadata";
 import { IBotDeclarationSettings } from "../decorators/BotDeclaration";
@@ -38,6 +38,9 @@ export default (components: any): Router => {
                 // Create the conversation state
                 const conversationState: ConversationState = new ConversationState(botSettings.storage, botSettings.namespace);
 
+                // Create the user state
+                const userState: UserState = new UserState(botSettings.storage, botSettings.namespace);
+
                 // generic error handler
                 adapter.onTurnError = async (context, error) => {
                     log(`[onTurnError]: ${error}`);
@@ -46,7 +49,7 @@ export default (components: any): Router => {
                 };
                 // Create the Bot
                 // eslint-disable-next-line new-cap
-                const bot: ActivityHandler = new component(conversationState, adapter);
+                const bot: ActivityHandler = new component(conversationState, userState, adapter);
 
                 // add the Messaging Extension Middleware
                 for (const p in bot) {

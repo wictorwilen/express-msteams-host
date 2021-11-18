@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [*1.9.0*] - <*2021-11-18*>
+
+### Changes
+
+* **BREAKING**: Added user state to classes marked with the `BotDeclaration` decorator. Class is instantiated with the following arguments: `(ConversationState, UserState, BotFrameworkAdapter)`
+* Added `*.office.com` to CSP header for pages
+
 ## [*1.8.0*] - <*2021-10-22*>
 
 ### Added
