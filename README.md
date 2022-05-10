@@ -54,6 +54,8 @@ export class myBot extends TeamsActivityHandler {
 
 ### Adding support for Calling in bots
 
+> **NOTE:** This method is deprecated and might be deleted in the future. For now it will remain available for usage.
+
 When adding calling support to bots you need to create an incoming webhook method of your bot implementation. This method should be decorated with the `BotCallingWebhook` decorator and must follow the [Express middleware signature](http://expressjs.com/en/4x/api.html#middleware-callback-function-examples). The endpoint you specify in the decorator, has to represent the calling endpoint you specify when registering the Teams Channel to your Bot in the Azure portal.
 
 ``` TypeScript
@@ -68,7 +70,6 @@ export class myBot extends TeamsActivityHandler {
         ...
     }
 }
-
 ```
 
 ### Decorators for Message Extensions
@@ -128,7 +129,7 @@ export class myConnector implements IConnector {
 
 ### Decorator for Outgoing Webhooks
 
-Outgoing Webhooks MUST be implemented as a class implementing the `IOutdegoingWebhook` interface and decorated using the `OutgoingWebhookDeclaration` decorator.
+Outgoing Webhooks MUST be implemented as a class implementing the `IOutgoingWebhook` interface and decorated using the `OutgoingWebhookDeclaration` decorator.
 
 ``` TypeScript
 import { OutgoingWebhookDeclaration, IOutgoingWebhook } from 'express-msteams-host';

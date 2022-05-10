@@ -6,6 +6,7 @@ import "reflect-metadata";
 /**
  * Decorator for methods to mark the webhook for the calling API
  * @param endpoint Endpoint of the calling API webhook
+ * @deprecated
  */
 export function BotCallingWebhook(endpoint: string) {
     return <T extends express.RequestHandler>(target: any, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> => {
