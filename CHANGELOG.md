@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## [*1.9.1*] - <*2022-06-23*>
+
+### Changes
+
+* Marked `BotCallingWebhook` as deprecated (Typescript typings only)
+
 ## [*1.9.0*] - <*2021-11-18*>
 
 ### Changes
@@ -21,11 +28,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-* Fixed in assue with CSP where the current host was not added correctly
+* Fixed in issue with CSP where the current host was not added correctly
 
 ### Changes
 
-* **BREAKING**: Upgraded to `botbuilder` version `4.14.1` as minumum version
+* **BREAKING**: Upgraded to `botbuilder` version `4.14.1` as minimum version
 * Dependency bump
 * Moved to Github actions
 * Moved to ESLint
